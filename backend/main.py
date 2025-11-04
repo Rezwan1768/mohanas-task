@@ -9,7 +9,7 @@ DB_FILE = "app.db"
 async def get_employees():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employees;")
+    cur.execute("SELECT id, employee_id, first_name, last_name, email, phone, department, status FROM employees;")
     employees = cur.fetchall()
     column_names = [description[0] for description in cur.description]
     employees = [dict(zip(column_names, row)) for row in employees]
