@@ -44,9 +44,19 @@ INSERT INTO rating_levels (value, description) VALUES
 
 INSERT INTO employees (employee_id, first_name, last_name, email, phone, department, status) VALUES
 ('E001', 'John', 'Doe', 'john.doe@example.com', '123-456-7890', 'Engineering', 'active'),
-('E002', 'Jane', 'Smith', 'jane.smith@example.com', '098-765-4321', 'Marketing', 'active');
+('E002', 'Jane', 'Smith', 'jane.smith@example.com', '098-765-4321', 'Marketing', 'active'),
+('E003', 'Michael', 'Brown', 'michael.brown@example.com', '222-333-4444', 'Finance', 'active'),
+('E004', 'Emily', 'Johnson', 'emily.johnson@example.com', '555-666-7777', 'Engineering', 'inactive'),
+('E005', 'David', 'Lee', 'david.lee@example.com', '888-999-0000', 'Human Resources', 'active');
 
 INSERT INTO employee_ratings (employee_id, p_rating, r_rating, o_rating, rating_period) VALUES
 (1, 4, 4, 4, 'quarterly'),
 (1, 5, 5, 5, 'annual'),
-(2, 3, 5, 4, 'quarterly')
+(2, 3, 5, 4, 'quarterly'),
+(2, 4, 4, 4, 'annual'),
+(3, 5, 4, 5, 'quarterly'),
+(3, 5, 5, 5, 'annual'),
+(4, 2, 3, 3, 'quarterly'),
+(4, 3, 4, 3, 'annual'),
+(5, 4, 4, 5, 'quarterly'),
+(5, 5, 5, 5, 'annual');

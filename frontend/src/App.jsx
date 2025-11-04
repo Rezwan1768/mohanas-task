@@ -1,5 +1,8 @@
 import { useState } from 'react'
+import { EmployeesTable } from './components/EmployeesTable'
 
 export function App() {
-  return <h1>Hello World!</h1>
+  return (
+    <EmployeesTable />
+  )
 }

@@ -1,9 +1,18 @@
 import sqlite3
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 DB_FILE = "app.db"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/api/v1/employees')
 async def get_employees():
@@ -20,8 +29,10 @@ async def get_employees():
 async def get_employee_ratings():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employee_ratings;")
+    cur.execute("SELECT id, employee_id, p_rating, r_rating, o_rating, rating_period  FROM employee_ratings;")
     employee_ratings = cur.fetchall()
+    column_names = [description[0] for description in cur.description]
+    employee_ratings = [dict(zip(column_names, row)) for row in employee_ratings]
     conn.close()
     return {"employee_ratings": employee_ratings}
 
@@ -31,5 +42,7 @@ async def get_rating_levels():
     cur = conn.cursor()
     cur.execute("SELECT * FROM rating_levels;")
     rating_levels = cur.fetchall()
+    column_names = [description[0] for description in cur.description]
+    rating_levels = [dict(zip(column_names, row)) for row in rating_levels]
     conn.close()
     return {"rating_levels": rating_levels}

@@ -13,11 +13,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -65,5 +69,41 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+
+.table {
+  border-collapse: collapse;
+  border: 2px solid white; /* optional outer border */
+}
+
+.table .th {
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  padding: 2px 4px;
+  border: 2px solid white;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 10px solid yellow;
+  border-left-color: lightblue;
+  border-radius: 50%;
+  animation: spin infinite 1.0s linear;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
