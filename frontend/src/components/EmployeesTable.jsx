@@ -8,8 +8,8 @@ export function EmployeesTable() {
   : [];
   console.log(employees)
 
-  if (loading) {
-    return <div className="spinner"></div>
+   if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (

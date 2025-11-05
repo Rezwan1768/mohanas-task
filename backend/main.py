@@ -29,7 +29,9 @@ async def get_employees():
 async def get_employee_ratings():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT id, employee_id, p_rating, r_rating, o_rating, rating_period  FROM employee_ratings;")
+    cur.execute("SELECT er.id, e.first_name, e.last_name, er.p_rating, er.r_rating, er.o_rating, er.rating_period  " \
+    "FROM employee_ratings AS er " \
+    "INNER JOIN employees AS e ON er.employee_id = e.id;")
     employee_ratings = cur.fetchall()
     column_names = [description[0] for description in cur.description]
     employee_ratings = [dict(zip(column_names, row)) for row in employee_ratings]
@@ -40,9 +42,11 @@ async def get_employee_ratings():
 async def get_rating_levels():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM rating_levels;")
-    rating_levels = cur.fetchall()
-    column_names = [description[0] for description in cur.description]
-    rating_levels = [dict(zip(column_names, row)) for row in rating_levels]
+    cur.execute("SELECT value, description FROM rating_levels;")
+    rows = cur.fetchall()
     conn.close()
+
+    # Convert to desired format
+    rating_levels = {value: description for value, description in rows}
+
     return {"rating_levels": rating_levels}
