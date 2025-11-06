@@ -6,22 +6,32 @@ export function EmployeeRatingTable() {
   const { employeeRatings, error, loading } = useEmployeeRating();
   const { ratingLevels, error: ratingLevelsError, loading: ratingLevelsLoading } = useRatingLevels();
 
-
   if (loading || ratingLevelsLoading) {
     return <div>Loading...</div>;
   }
 
-  const dataWithDescriptions = employeeRatings.map(({rating_period, ...emp}) => ({
+  const combinedData = employeeRatings.map(({rating_period, year, o_rating,  ...emp}) => ({
     ...emp,
-    description: ratingLevels[emp.o_rating] || "N/A", 
-    rating_period
+    description: ratingLevels[o_rating] || "N/A",
+    rating_period,
+    year
   }));
 
+  console.log(combinedData);
+  const columnLabels = {
+    employee_id: "Employee ID",
+    name: "Name",
+    p_rating: "Performance Rating",
+    r_rating: "Reliability Rating",
+    description: "Rating Description",
+    rating_period: "Rating Period",
+    year: "Year"
+  }
 
-  const headings =
-    dataWithDescriptions.length > 0
-      ? Object.keys(dataWithDescriptions[0]).filter(key => key !== "id")
-      : [];
+  const columns = Object.keys(columnLabels).map((key) => ({
+    key,
+    label: columnLabels[key]
+  }))
 
-  return <Table headings={headings} data={dataWithDescriptions} />;
+  return <Table headings={columns} data={combinedData} />;
 }

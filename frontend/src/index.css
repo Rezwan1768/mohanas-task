@@ -49,6 +49,11 @@ body {
   }
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 
 .table {
   margin: 0 auto;

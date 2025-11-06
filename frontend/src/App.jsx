@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import { EmployeesTable } from './components/EmployeesTable'
-import { EmployeeRatingTable } from './components/EmployeeRatingTable'
+import { Outlet, Link } from "react-router"
 export function App() {
   return (
     <>
-      <EmployeesTable />
-      <EmployeeRatingTable />
+      <nav>
+        <Link to="/employees">Employees</Link>
+        <Link to="/employee-ratings">Employee Ratings</Link>
+      </nav>
+      <Outlet />
     </>
   )
 }

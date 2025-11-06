@@ -41,7 +41,8 @@ async def get_employee_ratings():
     cur.execute(
         "SELECT " \
             "er.id, " \
-            "e.first_name || ' ' || e.last_name, " \
+            "e.employee_id, " \
+            "e.first_name || ' ' || e.last_name AS name, " \
             "er.p_rating, " \
             "er.r_rating, " \
             "er.o_rating, " \

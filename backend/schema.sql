@@ -20,7 +20,7 @@ CREATE TABLE employee_ratings (
   p_rating INTEGER CHECK(p_rating BETWEEN 1 AND 5),
   r_rating INTEGER CHECK(r_rating BETWEEN 1 AND 5),
   o_rating INTEGER DEFAULT 0,
-  rating_period TEXT CHECK(rating_period IN ('q1', 'q2', 'q3', 'q4', 'h1', 'h2', 'annual')),
+  rating_period TEXT CHECK(rating_period IN ('Q1', 'Q2', 'Q3', 'Q4', 'H1', 'H2', 'Annual')),
   year INTEGER CHECK(year BETWEEN 2025 AND 2030) DEFAULT (strftime('%Y', 'now')),
   created_on TEXT DEFAULT CURRENT_TIMESTAMP,
   modified_on TEXT DEFAULT CURRENT_TIMESTAMP,
@@ -50,14 +50,14 @@ INSERT INTO employees (employee_id, first_name, last_name, email, phone, departm
 ('E004', 'Emily', 'Johnson', 'emily.johnson@example.com', '555-666-7777', 'Engineering', 'inactive'),
 ('E005', 'David', 'Lee', 'david.lee@example.com', '888-999-0000', 'Human Resources', 'active');
 
-INSERT INTO employee_ratings (employee_id, p_rating, r_rating, o_rating, rating_period) VALUES
-(1, 4, 4, 4, 'q1', 2025),
-(1, 5, 5, 5, 'annual', 2025),
-(2, 3, 5, 4, 'q2', 2026),
-(2, 4, 4, 4, 'h1', 2026),
-(3, 5, 4, 5, 'q3', 2027),
-(3, 5, 5, 5, 'annual', 2027),
-(4, 2, 3, 3, 'h2', 2028),
-(4, 3, 4, 3, 'annual', 2028),
-(5, 4, 4, 5, 'q4', 2029),
-(5, 5, 5, 5, 'annual', 2030);
+INSERT INTO employee_ratings (employee_id, p_rating, r_rating, o_rating, rating_period, year) VALUES
+(1, 4, 4, 4, 'Q1', 2025),
+(1, 5, 5, 5, 'Annual', 2025),
+(2, 3, 5, 4, 'Q2', 2026),
+(2, 4, 4, 4, 'H1', 2026),
+(3, 5, 4, 5, 'Q3', 2027),
+(3, 5, 5, 5, 'Annual', 2027),
+(4, 2, 3, 3, 'H2', 2028),
+(4, 3, 4, 3, 'Annual', 2028),
+(5, 4, 4, 5, 'Q4', 2029),
+(5, 5, 5, 5, 'Annual', 2030);
