@@ -20,7 +20,8 @@ CREATE TABLE employee_ratings (
   p_rating INTEGER CHECK(p_rating BETWEEN 1 AND 5),
   r_rating INTEGER CHECK(r_rating BETWEEN 1 AND 5),
   o_rating INTEGER DEFAULT 0,
-  rating_period TEXT CHECK(rating_period IN ('quarterly', 'semi-annual', 'annual')),
+  rating_period TEXT CHECK(rating_period IN ('q1', 'q2', 'q3', 'q4', 'h1', 'h2', 'annual')),
+  year INTEGER CHECK(year BETWEEN 2025 AND 2030) DEFAULT (strftime('%Y', 'now')),
   created_on TEXT DEFAULT CURRENT_TIMESTAMP,
   modified_on TEXT DEFAULT CURRENT_TIMESTAMP,
   created_by INTEGER REFERENCES employees(id),
@@ -50,13 +51,13 @@ INSERT INTO employees (employee_id, first_name, last_name, email, phone, departm
 ('E005', 'David', 'Lee', 'david.lee@example.com', '888-999-0000', 'Human Resources', 'active');
 
 INSERT INTO employee_ratings (employee_id, p_rating, r_rating, o_rating, rating_period) VALUES
-(1, 4, 4, 4, 'quarterly'),
-(1, 5, 5, 5, 'annual'),
-(2, 3, 5, 4, 'quarterly'),
-(2, 4, 4, 4, 'annual'),
-(3, 5, 4, 5, 'quarterly'),
-(3, 5, 5, 5, 'annual'),
-(4, 2, 3, 3, 'quarterly'),
-(4, 3, 4, 3, 'annual'),
-(5, 4, 4, 5, 'quarterly'),
-(5, 5, 5, 5, 'annual');
+(1, 4, 4, 4, 'q1', 2025),
+(1, 5, 5, 5, 'annual', 2025),
+(2, 3, 5, 4, 'q2', 2026),
+(2, 4, 4, 4, 'h1', 2026),
+(3, 5, 4, 5, 'q3', 2027),
+(3, 5, 5, 5, 'annual', 2027),
+(4, 2, 3, 3, 'h2', 2028),
+(4, 3, 4, 3, 'annual', 2028),
+(5, 4, 4, 5, 'q4', 2029),
+(5, 5, 5, 5, 'annual', 2030);

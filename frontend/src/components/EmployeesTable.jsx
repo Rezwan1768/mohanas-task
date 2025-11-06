@@ -3,16 +3,26 @@ import { Table } from './table';
 
 export function EmployeesTable() {
   const { employees, error, loading } = useEmployees();
-  const headings = employees.length > 0
-  ? Object.keys(employees[0]).filter(key => key !== "id")
-  : [];
-  console.log(employees)
 
-   if (loading) {
+  const columnLabels = {
+    employee_id: "Employee ID",
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
+    department: "Department",
+    status: "Status"
+  }
+
+  const columns = Object.keys(columnLabels).map((key) => ({
+    key,
+    label: columnLabels[key]
+  }))
+
+  if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Table headings={headings} data={employees} />
+    <Table headings={columns} data={employees} />
   )
 }

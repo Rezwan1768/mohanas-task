@@ -18,7 +18,16 @@ app.add_middleware(
 async def get_employees():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT id, employee_id, first_name, last_name, email, phone, department, status FROM employees;")
+    cur.execute(
+        "SELECT " \
+            "id, " \
+            "employee_id, " \
+            "first_name || ' ' || last_name AS name, " \
+            "email, " \
+            "phone, " \
+            "department, " \
+            "status " \
+        "FROM employees;")
     employees = cur.fetchall()
     column_names = [description[0] for description in cur.description]
     employees = [dict(zip(column_names, row)) for row in employees]
@@ -29,9 +38,17 @@ async def get_employees():
 async def get_employee_ratings():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT er.id, e.first_name, e.last_name, er.p_rating, er.r_rating, er.o_rating, er.rating_period  " \
-    "FROM employee_ratings AS er " \
-    "INNER JOIN employees AS e ON er.employee_id = e.id;")
+    cur.execute(
+        "SELECT " \
+            "er.id, " \
+            "e.first_name || ' ' || e.last_name, " \
+            "er.p_rating, " \
+            "er.r_rating, " \
+            "er.o_rating, " \
+            "er.rating_period, " \
+            "er.year " \
+        "FROM employee_ratings AS er " \
+        "INNER JOIN employees AS e ON er.employee_id = e.id;")
     employee_ratings = cur.fetchall()
     column_names = [description[0] for description in cur.description]
     employee_ratings = [dict(zip(column_names, row)) for row in employee_ratings]

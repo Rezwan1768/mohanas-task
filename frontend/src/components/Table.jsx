@@ -4,7 +4,7 @@ export function Table({headings, data}) {
       <thead>
         <tr>
           {headings.map((heading) => {
-            return <th key={heading}>{heading}</th>
+            return <th key={heading.key}>{heading.label}</th>
           })}
         </tr>
       </thead>
@@ -13,7 +13,7 @@ export function Table({headings, data}) {
             return (
               <tr key={employee.id}>
                 {headings.map((heading) => {
-                  return <td key={heading}>{employee[heading]}</td>
+                  return <td key={heading.key}>{employee[heading.key]}</td>
                 })}
               </tr>
             )

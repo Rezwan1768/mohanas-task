@@ -13,7 +13,7 @@ export function EmployeeRatingTable() {
 
   const dataWithDescriptions = employeeRatings.map(({rating_period, ...emp}) => ({
     ...emp,
-    description: ratingLevels[emp.p_rating] || "N/A", // or r_rating
+    description: ratingLevels[emp.o_rating] || "N/A", 
     rating_period
   }));
 
