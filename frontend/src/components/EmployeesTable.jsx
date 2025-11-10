@@ -42,8 +42,8 @@ export function EmployeesTable() {
   return (
     <>
       <FilterForm onSubmit={handleSubmit}>
-        <SearchBox searchTerm={name} setSearchTerm={setName} label="Name" />
-        <SearchBox searchTerm={employeeId} setSearchTerm={setEmployeeId} label="ID" />
+        <SearchBox label="Name" value={name} setValue={setName} />
+        <SearchBox label="Emp ID" value={employeeId} setValue={setEmployeeId} />
         <Dropdown label="Status" values={valid_statuses} value={status} setValue={setStatus} />
         <button type="submit" className={classes.button}>
           Search

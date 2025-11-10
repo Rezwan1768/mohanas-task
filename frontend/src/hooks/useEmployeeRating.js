@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useEmployeeRating() {
+export function useEmployeeRating(name, employeeId, ratingPeriod, year, trigger ) {
   const [employeeRatings, setEmployeeRatings] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -8,7 +8,12 @@ export function useEmployeeRating() {
   useEffect(() => {
     (async function fetchEmployees() {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/v1/employee_ratings");
+        const params = new URLSearchParams();
+        if (name) params.append("name", name);
+        if (employeeId) params.append("id", employeeId);
+        if (ratingPeriod) params.append("rating_period", ratingPeriod);
+        if (year) params.append("year", year);
+        const response = await fetch(`http://127.0.0.1:8000/api/v1/employee_ratings?${params.toString()}`);
         if (!response.ok) {
           throw new Error("Failed to fetch employee ratings");
         }
@@ -21,7 +26,7 @@ export function useEmployeeRating() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [trigger]);
   return { employeeRatings, error, loading };
 }
 

@@ -3,7 +3,7 @@ CREATE TABLE employees (
   employee_id TEXT UNIQUE NOT NULL,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
-  email TEXT UNIQUE,
+  email TEXT UNIQUE NOT NULL,
   phone TEXT,
   department TEXT,
   status TEXT NOT NULL CHECK(status IN ('active', 'inactive', 'terminated')),
