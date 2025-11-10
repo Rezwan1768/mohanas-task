@@ -90,3 +90,8 @@ nav {
     transform: rotate(360deg);
   }
 } */
+
+
+.search-box {
+  display: flex;
+}

@@ -3,7 +3,7 @@ export function App() {
   return (
     <>
       <nav>
-        <Link to="/employees">Employees</Link>
+        <Link to="/">Employees</Link>
         <Link to="/employee-ratings">Employee Ratings</Link>
       </nav>
       <Outlet />

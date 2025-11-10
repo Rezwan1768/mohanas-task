@@ -1,0 +1,31 @@
+.inputBox {
+  display: flex;
+  gap: 0;
+  border: 2px solid rgb(141, 24, 230); 
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.inputBox:focus-within {
+  border-color: white
+}
+
+.inputBox > * {
+  padding: 2px 4px;
+  font-size: 1rem;
+  border: none;
+}
+
+.inputBox label {
+  border-right: none;
+  background-color: rgb(141, 24, 230);
+
+}
+
+.inputBox input {
+  border-left: none;
+  outline: none;
+  color: inherit;
+}
+

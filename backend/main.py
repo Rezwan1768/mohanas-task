@@ -1,6 +1,8 @@
 import sqlite3
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from enum import Enum
+from routers import employees 
 
 app = FastAPI()
 
@@ -14,25 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/api/v1/employees')
-async def get_employees():
-    conn = sqlite3.connect(DB_FILE)
-    cur = conn.cursor()
-    cur.execute(
-        "SELECT " \
-            "id, " \
-            "employee_id, " \
-            "first_name || ' ' || last_name AS name, " \
-            "email, " \
-            "phone, " \
-            "department, " \
-            "status " \
-        "FROM employees;")
-    employees = cur.fetchall()
-    column_names = [description[0] for description in cur.description]
-    employees = [dict(zip(column_names, row)) for row in employees]
-    conn.close()
-    return {"employees": employees}
+app.include_router(employees.router, prefix="/api/v1")
 
 @app.get('/api/v1/employee_ratings')
 async def get_employee_ratings():
@@ -68,3 +52,4 @@ async def get_rating_levels():
     rating_levels = {value: description for value, description in rows}
 
     return {"rating_levels": rating_levels}
+

@@ -1,8 +1,24 @@
+import { useState } from "react";
 import { useEmployees } from "../hooks/useEmployees";
 import { Table } from './table';
+import { SearchBox } from "./SearchBox";
+import { Dropdown } from "./Dropdown";
+import { FilterForm } from "./FilterForm";
+import classes from '../styles/EmployeesTable.module.css';
 
 export function EmployeesTable() {
-  const { employees, error, loading } = useEmployees();
+
+  const [name, setName] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
+  const [status, setStatus] = useState("All");
+  const [trigger, setTrigger] = useState(0);
+
+  const { employees, error, loading } = useEmployees(name, employeeId, status, trigger);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setTrigger(trigger + 1);
+  }
 
   const columnLabels = {
     employee_id: "Employee ID",
@@ -22,7 +38,18 @@ export function EmployeesTable() {
     return <div>Loading...</div>;
   }
 
+  const valid_statuses = ["All", "Active", "Inactive", "Terminated"];
   return (
-    <Table headings={columns} data={employees} />
+    <>
+      <FilterForm onSubmit={handleSubmit}>
+        <SearchBox searchTerm={name} setSearchTerm={setName} label="Name" />
+        <SearchBox searchTerm={employeeId} setSearchTerm={setEmployeeId} label="ID" />
+        <Dropdown label="Status" values={valid_statuses} value={status} setValue={setStatus} />
+        <button type="submit" className={classes.button}>
+          Search
+        </button>
+      </FilterForm>
+      <Table headings={columns} data={employees} />
+    </>
   )
 }
