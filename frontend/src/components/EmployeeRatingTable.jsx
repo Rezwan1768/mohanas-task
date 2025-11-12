@@ -54,7 +54,7 @@ export function EmployeeRatingTable() {
       <FilterForm onSubmit={handleSubmit}>
         <SearchBox label="Name" value={name} setValue={setName} />
         <SearchBox label="Emp ID" value={id} setValue={setId} />
-        <Dropdown label="Rating Period" values={valid_rating_periods} value={ratingPeriod} setValue={setRatingPeriod} />
+        <Dropdown label="Rating" values={valid_rating_periods} value={ratingPeriod} setValue={setRatingPeriod} />
         <SearchBox label="Year" value={year} setValue={setYear} />
         <button type="submit" className={classes.button}>
           Search
